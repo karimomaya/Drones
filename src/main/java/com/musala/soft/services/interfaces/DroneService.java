@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DroneService {
     Drone register(Drone drone);
-    Drone load(Drone drone);
+    Drone load(List<Product> products);
     List<Product> checkDroneItems(Drone drone);
     List<Drone> availableDrones();
     double batteryLevel(Drone drone);

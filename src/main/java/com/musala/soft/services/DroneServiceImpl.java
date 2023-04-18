@@ -3,17 +3,21 @@ package com.musala.soft.services;
 import com.musala.soft.models.Drone;
 import com.musala.soft.models.Product;
 import com.musala.soft.services.interfaces.DroneService;
+import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 
+@Service
 public class DroneServiceImpl implements DroneService {
+
     @Override
-    public Drone register(Drone drone) {
+    public Drone register(@Valid Drone drone) {
         return null;
     }
 
     @Override
-    public Drone load(Drone drone) {
+    public Drone load(List<Product> products) {
         return null;
     }
 
@@ -31,4 +35,6 @@ public class DroneServiceImpl implements DroneService {
     public double batteryLevel(Drone drone) {
         return 0;
     }
+
+
 }
