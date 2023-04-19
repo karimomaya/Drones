@@ -7,6 +7,8 @@ import com.musala.soft.controllers.DroneController;
 import com.musala.soft.models.dto.DroneDto;
 import com.musala.soft.models.enums.Model;
 import com.musala.soft.services.interfaces.DroneService;
+import com.musala.soft.services.interfaces.ProductService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ import java.util.Random;
 public class DroneValidationTest {
 
     @MockBean
+    ProductService productService ;
+
+    @MockBean
     DroneService droneService;
 
     @Autowired
@@ -33,6 +38,7 @@ public class DroneValidationTest {
     private final String UPPERCASE_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     @Test
+    @DisplayName("Integration Test: Add Drones with wrong data")
     public void whenInputIsInvalid_thenReturnsStatus400() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/drones")
                 .content(convertDroneDtoObjectToJsonString(initializeDroneObject(generateRandomString(3, UPPERCASE_ALPHABET), null, 0)))
@@ -42,6 +48,7 @@ public class DroneValidationTest {
     }
 
     @Test
+    @DisplayName("Integration Test: Serial Number bigger than 100 character")
     public void whenSerialNumberLengthBiggerThan100_thenReturnsStatus400() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/drones")
                 .content(convertDroneDtoObjectToJsonString(initializeDroneObject(generateRandomString(101, UPPERCASE_ALPHABET), Model.Lightweight, 500.1)))
@@ -51,6 +58,7 @@ public class DroneValidationTest {
     }
 
     @Test
+    @DisplayName("Integration Test: Weight bigger than 100 character")
     public void whenWeightBiggerThan500_thenReturnsStatus400() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/drones")
                 .content(convertDroneDtoObjectToJsonString(initializeDroneObject(generateRandomString(3, UPPERCASE_ALPHABET), Model.Lightweight, 500.1)))

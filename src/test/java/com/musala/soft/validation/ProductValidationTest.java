@@ -6,10 +6,13 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.musala.soft.controllers.ProductController;
 import com.musala.soft.models.dto.ProductDto;
 import com.musala.soft.models.enums.Model;
+import com.musala.soft.services.interfaces.ProductService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,6 +24,10 @@ import java.util.Random;
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = ProductController.class)
 public class ProductValidationTest {
+
+    @MockBean
+    ProductService productService ;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -34,6 +41,7 @@ public class ProductValidationTest {
 
 
     @Test
+    @DisplayName("Integration Test: Name Has Special Character")
     public void whenNameHasSpecialCharacter_thenReturnsStatus400() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/products")
                 .content(convertProductDtoObjectToJsonString(initializeDroneObject(generateRandomString(3, SPECIAL_CHARACTER_STRING), generateRandomString(3, UPPERCASE_LETTER+NUMBER+UNDERSCORE_DASH), 500.1)))
@@ -43,6 +51,7 @@ public class ProductValidationTest {
     }
 
     @Test
+    @DisplayName("Integration Test: Code Has Special Character")
     public void whenCodeHasSpecialCharacter_thenReturnsStatus400() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/products")
                 .content(convertProductDtoObjectToJsonString(initializeDroneObject(generateRandomString(3, UPPERCASE_LETTER+NUMBER+LOWERCASE_LETTER+UNDERSCORE_DASH), generateRandomString(3, SPECIAL_CHARACTER_STRING), 500.1)))
@@ -52,6 +61,7 @@ public class ProductValidationTest {
     }
 
     @Test
+    @DisplayName("Integration Test: Code Has Lower Case")
     public void whenCodeHasLowerCase_thenReturnsStatus400() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/products")
                 .content(convertProductDtoObjectToJsonString(initializeDroneObject(generateRandomString(3, NUMBER+UPPERCASE_LETTER), generateRandomString(3, LOWERCASE_LETTER), 500.1)))

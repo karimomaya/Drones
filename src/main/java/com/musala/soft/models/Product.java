@@ -11,4 +11,8 @@ public class Product extends AbstractProduct {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    Drone drone;
+
+    String transactionId;
 }

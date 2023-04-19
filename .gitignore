@@ -27,3 +27,5 @@
 hs_err_pid*
 /.idea/
 /target/
+/mem.mv.db
+/mem.lock.db
