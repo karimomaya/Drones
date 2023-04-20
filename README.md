@@ -97,7 +97,7 @@ RESPONSE: HTTP 200 (Success)
     * Order Service: Take the order from the client and select which warehouse (warehouse that have ) will be nearest from the client and send this request to the drone service   
     * Drone Service: Drone service take the request and select the best match drone to handle the request and send the request to product service and also handle the drones that need to be recharge.
     * Product Service: product service will load the drones and and mark the drones as loaded. 
-* multiple drone can serve the List of products by using maximum sub array that can be served for one drone and repeat this process until no items remaining on the list
+* multiple drone can serve the same order by using maximum sub array that can be served for one drone and repeat this process until no items remaining on the list.
 * The capacity of consuming  the battery will be calculated based on the destination the drone will be delivered. so some requested will not be delivered because no drones can travel to the target. 
 * The logs need more enhanced so by sending RequestId, ServiceId then the log message.
 ## Last but not least
