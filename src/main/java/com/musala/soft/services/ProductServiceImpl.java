@@ -1,14 +1,15 @@
 package com.musala.soft.services;
 
-import com.musala.soft.exceptions.RecordNotFoundException;
 import com.musala.soft.models.Product;
 import com.musala.soft.repositories.ProductRepository;
 import com.musala.soft.services.interfaces.ProductService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;

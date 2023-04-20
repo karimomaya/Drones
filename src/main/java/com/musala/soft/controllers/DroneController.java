@@ -82,5 +82,8 @@ public class DroneController {
         return new ResponseEntity<Double>(droneService.batteryLevel(id), HttpStatus.OK);
     }
 
-
+    @GetMapping("/available")
+    public ResponseEntity<List> findAvailableDrones(){
+        return new ResponseEntity<List>(droneService.availableDrones(), HttpStatus.OK);
+    }
 }

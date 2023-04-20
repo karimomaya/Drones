@@ -4,6 +4,7 @@ import com.musala.soft.models.enums.Model;
 import com.musala.soft.models.enums.State;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.*;
@@ -18,8 +19,8 @@ public abstract class AbstractDrone {
     String serialNumber;
     @NotNull(message = "Model is mandatory")
     Model model;
-    @DecimalMax(value = "500.0",  message = "Weight must be {value} gr max")
-    @DecimalMin(value = "100.0",  message = "Weight must be at least {value} gr")
+    @NotNull(message = "Weight is mandatory")
+    @Range(min = 100, max = 500, message = "Weight must be between 100 and 500")
     Double weight;
     @ColumnDefault("100.0")
     Double batteryCapacity;
